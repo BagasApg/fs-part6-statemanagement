@@ -11,8 +11,7 @@ const AnecdoteForm = () => {
 
     const content = e.target.anecdote.value
 
-    const newAnecdote = { id: generateId(), content, votes: 0 }
-    add(newAnecdote)
+    add(content)
 
     e.target.reset()
   }
