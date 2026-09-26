@@ -1,10 +1,11 @@
+import { useNotificationsActions } from "../notificationStore"
 import { useAnecdotesActions } from "../store"
 
 const AnecdoteForm = () => {
 
   const { add } = useAnecdotesActions()
 
-  const generateId = () => Number((Math.random() * 1000000).toFixed(0))
+  const { setNotification } = useNotificationsActions()
 
   const addAnecdote = (e) => {
     e.preventDefault()
@@ -12,6 +13,11 @@ const AnecdoteForm = () => {
     const content = e.target.anecdote.value
 
     add(content)
+
+    setNotification(`Anecdote "${content}" created successfully!`)
+    setTimeout(() => {
+      setNotification('')
+    }, 5000)
 
     e.target.reset()
   }
