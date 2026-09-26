@@ -24,14 +24,18 @@ const sortedContents = [...initialAnecdotes]
 // json-server watches db.json and reloads it on change, but the reload is
 // async, so poll the API until it reflects the reset data before continuing.
 const resetDb = async ({ request }) => {
-  writeFileSync(dbPath, JSON.stringify({ anecdotes: initialAnecdotes }, null, 2))
+  const response = await request.get("http://localhost:3001/anecdotes")
+  const existing = await response.json()
 
-  await expect(async () => {
-    const response = await request.get("http://localhost:3001/anecdotes")
-    const data = await response.json()
-    expect(data).toHaveLength(initialAnecdotes.length)
-    expect(data.every((a) => a.votes === initialAnecdotes.find((i) => i.id === a.id)?.votes)).toBe(true)
-  }).toPass({ timeout: 10000 })
+  await Promise.all(
+    existing.map((a) => request.delete(`http://localhost:3001/anecdotes/${a.id}`))
+  )
+
+  await Promise.all(
+    initialAnecdotes.map((a) =>
+      request.post("http://localhost:3001/anecdotes", { data: a })
+    )
+  )
 }
 
 // The block that wraps one anecdote's content and its "has N votes / vote / delete" row.
