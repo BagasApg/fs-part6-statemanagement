@@ -14,7 +14,7 @@ const AnecdoteForm = () => {
 
     add(content)
 
-    setNotification(`Anecdote "${content}" created successfully!`)
+    setNotification(`Anecdote "${content}" created successfully`)
     setTimeout(() => {
       setNotification('')
     }, 5000)

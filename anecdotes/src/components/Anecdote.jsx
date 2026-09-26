@@ -10,7 +10,7 @@ const Anecdote = ({ anecdote }) => {
   const handleVote = (id) => {
     vote(id)
 
-    setNotification(`You voted '${anecdote.content}'!`)
+    setNotification(`you voted '${anecdote.content}'`)
     setTimeout(() => {
       setNotification('')
     }, 5000)
@@ -19,7 +19,7 @@ const Anecdote = ({ anecdote }) => {
   const handleDelete = (id) => {
     remove(id)
 
-    setNotification(`You delete '${anecdote.content}'!`)
+    setNotification(`You delete '${anecdote.content}'`)
     setTimeout(() => {
       setNotification('')
     }, 5000)
