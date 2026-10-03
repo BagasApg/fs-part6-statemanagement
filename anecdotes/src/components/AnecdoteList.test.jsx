@@ -50,7 +50,7 @@ it('component displaying anecdotes from store receives filtered list of anecdote
 
   render(<AnecdoteList />)
 
-  screen.debug()
+  // screen.debug()
 
   expect(screen.getByText(mockAnecdotes[0].content)).toBeDefined()
   expect(screen.getByText(mockAnecdotes[1].content)).toBeDefined()
