@@ -5,6 +5,7 @@ import { useAnecdotes } from './hooks/useAnecdotes'
 
 const App = () => {
 
+  // This was added first already
   const { anecdotes, isPending, isError, addAnecdote, vote } = useAnecdotes()
 
   const handleVote = (anecdote) => {
