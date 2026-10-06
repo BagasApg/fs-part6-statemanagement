@@ -5,10 +5,10 @@ import { useAnecdotes } from './hooks/useAnecdotes'
 
 const App = () => {
 
-  const { anecdotes, isPending, isError, addAnecdote } = useAnecdotes()
+  const { anecdotes, isPending, isError, addAnecdote, vote } = useAnecdotes()
 
   const handleVote = (anecdote) => {
-    console.log('vote')
+    vote(anecdote)
   }
 
   if (isPending) {
