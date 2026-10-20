@@ -2,14 +2,23 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 
 import { useAnecdotes } from './hooks/useAnecdotes'
+import useNotification from './hooks/useNotification'
 
 const App = () => {
 
   // This was added first already
   const { anecdotes, isPending, isError, addAnecdote, vote } = useAnecdotes()
 
+  const { setNotification } = useNotification()
+
   const handleVote = (anecdote) => {
     vote(anecdote)
+
+    setNotification(`anecdote '${anecdote.content}' voted`)
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
+
   }
 
   if (isPending) {
